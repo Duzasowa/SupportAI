@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <!-- Standard meta tags required for proper web document and responsive behavior -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Support Assistant</title>
+    <!-- Link to Tailwind CSS for styling -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body
+    class="bg-gradient-to-r from-green-400 to-blue-500 min-h-screen flex items-center justify-center"
+  >
+    <!-- Main container for aligning content to the center -->
+    <div class="container mx-auto p-6">
+      <!-- Card container for the form with max width, shadow, and rounded corners -->
+      <div
+        class="max-w-2xl mx-auto bg-white rounded-xl shadow-xl overflow-hidden transform"
+      >
+        <div class="md:flex">
+          <!-- Content area -->
+          <div class="p-8">
+            <!-- Header of the form -->
+            <div
+              class="uppercase tracking-wide text-lg text-indigo-600 font-bold"
+            >
+              Support Assistant
+            </div>
+            <h1
+              class="block mt-2 text-2xl leading-tight font-semibold text-black"
+            >
+              Ask your question
+            </h1>
+            <!-- Form for submitting the question -->
+            <form action="/answer" method="post" class="mt-4">
+              <!-- Input field for the question -->
+              <div class="mb-4">
+                <label
+                  for="question"
+                  class="block text-gray-700 text-sm font-bold mb-2"
+                  >Question:</label
+                >
+                <input
+                  type="text"
+                  id="question"
+                  name="question"
+                  required
+                  class="shadow-lg appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                />
+              </div>
+              <!-- Submit button -->
+              <div class="flex items-center justify-between">
+                <input
+                  type="submit"
+                  value="Answer"
+                  class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer"
+                />
+              </div>
+            </form>
+            <!-- Conditionally rendered answer section -->
+            {% if answer %}
+            <div class="mt-6">
+              <div class="text-gray-700 font-bold">Answer:</div>
+              <p class="text-gray-600 text-base mt-2">{{ answer }}</p>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
