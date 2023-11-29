@@ -22,7 +22,7 @@
       >
         <div class="md:flex">
           <!-- Content area -->
-          <div class="p-8">
+          <div class="w-full p-8">
             <!-- Header of the form -->
             <div
               class="uppercase tracking-wide text-lg text-indigo-600 font-bold"
@@ -71,5 +71,22 @@
         </div>
       </div>
     </div>
+
+    <!-- Loader -->
+    <div
+      id="loader"
+      class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center"
+    >
+      <div
+        class="loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-32 w-32"
+      ></div>
+    </div>
+
+    <script>
+      // JavaScript to display the loader when submitting the form
+      document.querySelector("form").addEventListener("submit", function () {
+        document.getElementById("loader").classList.remove("hidden"); // Show loader
+      });
+    </script>
   </body>
 </html>

@@ -51,22 +51,26 @@ def index():
     """
     return render_template('index.html')
 
+# Function to adapt the answer from the FAQ using ChatGPT
+def adapt_faq_answer(question, faq_answer):
+    # Forming a request to ChatGPT to adapt the answer
+    adapted_query = f"Given that '{faq_answer}', how can this be adapted to the situation: {question}?"
+    return ask_chatgpt(adapted_query)
+
 @app.route('/answer', methods=['POST'])
 def get_answer():
-    """
-    Route to handle the form submission.
-    When the user submits a question, this route first searches the FAQ,
-    and if no answer is found, it makes a request to the ChatGPT API.
-    It then renders the same index.html template with the answer.
-    """
     question = request.form['question']
 
-    # First, search the FAQ for an answer
-    answer = search_faq(question)
+    # First, look in the FAQ
+    faq_answer = search_faq(question)
 
-    # If no answer is found in the FAQ, call the ChatGPT API
-    if not answer:
+    if faq_answer:
+        # Adapt the answer from the FAQ using ChatGPT
+        answer = adapt_faq_answer(question, faq_answer)
+    else:
+        # If there is no answer in the FAQ, ask ChatGPT directly
         answer = ask_chatgpt(question)
+    
     return render_template('index.html', answer=answer)
 
 if __name__ == '__main__':
